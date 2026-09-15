@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-slate-950 text-slate-100 antialiased font-sans min-h-screen selection:bg-emerald-500 selection:text-white;
+  }
+}
+
+/* Glassmorphism Card Utilities */
+.glass-panel {
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-input {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: white;
+  transition: all 0.2s ease-in-out;
+}
+
+.glass-input:focus {
+  border-color: #10b981;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+}
