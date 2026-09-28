@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import type { DamagePin, DamageType, DamageSeverity, DamageReport } from '../types';
 import { AlertTriangle, Trash2, ShieldAlert, Layers } from 'lucide-react';
 
-
 export type CarView = 'Top' | 'Left Side' | 'Right Side' | 'Front' | 'Back' | 'Windshield';
 
 interface DamageInspectorProps {
@@ -76,57 +75,43 @@ export const DamageInspector: React.FC<DamageInspectorProps> = ({
   };
 
   const selectedPin = pins.find((p) => p.id === selectedPinId);
-  const currentViewPins = pins.filter((p) => p.view === activeView);
 
   const getSeverityBadgeColor = (sev: DamageSeverity) => {
     switch (sev) {
       case 'Minor':
-        return 'bg-amber-500/20 text-amber-400 border-amber-500/30';
+        return 'bg-amber-100 dark:bg-amber-500/20 text-amber-700 dark:text-amber-400 border-amber-300 dark:border-amber-500/30';
       case 'Moderate':
-        return 'bg-orange-500/20 text-orange-400 border-orange-500/30';
+        return 'bg-orange-100 dark:bg-orange-500/20 text-orange-700 dark:text-orange-400 border-orange-300 dark:border-orange-500/30';
       case 'Severe':
-        return 'bg-rose-500/20 text-rose-400 border-rose-500/30';
+        return 'bg-rose-100 dark:bg-rose-500/20 text-rose-700 dark:text-rose-400 border-rose-300 dark:border-rose-500/30';
       default:
-        return 'bg-slate-700 text-slate-300';
-    }
-  };
-
-  const getSeverityPinBg = (sev: DamageSeverity) => {
-    switch (sev) {
-      case 'Minor':
-        return 'bg-amber-500 shadow-amber-500/50';
-      case 'Moderate':
-        return 'bg-orange-500 shadow-orange-500/50';
-      case 'Severe':
-        return 'bg-rose-600 shadow-rose-600/50 animate-pulse';
-      default:
-        return 'bg-sky-500 shadow-sky-500/50';
+        return 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300';
     }
   };
 
   return (
-    <div className="w-full glass-panel rounded-2xl p-5 border border-slate-800 space-y-4">
+    <div className="w-full glass-panel rounded-2xl p-5 border border-slate-200 dark:border-slate-800 space-y-4">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2.5">
-          <div className="p-2 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400">
+          <div className="p-2 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400">
             <ShieldAlert className="w-5 h-5" />
           </div>
           <div>
-            <h3 className="text-sm font-bold text-white uppercase tracking-wider">{title}</h3>
-            <p className="text-xs text-slate-400">Click outline diagram to place or edit damage pins</p>
+            <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">{title}</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Click outline diagram to place or edit damage pins</p>
           </div>
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="px-3 py-1 rounded-full text-xs font-semibold bg-slate-800 border border-slate-700 text-slate-300">
-            Total Damage Pins: <strong className="text-emerald-400 font-mono">{pins.length}</strong>
+          <span className="px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300">
+            Total Damage Pins: <strong className="text-emerald-600 dark:text-emerald-400 font-mono">{pins.length}</strong>
           </span>
         </div>
       </div>
 
       {/* View Switcher Tabs */}
-      <div className="flex items-center gap-1.5 p-1.5 rounded-xl bg-slate-900/80 border border-slate-800 overflow-x-auto">
+      <div className="flex items-center gap-1.5 p-1.5 rounded-xl bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 overflow-x-auto">
         {views.map((v) => {
           const count = pins.filter((p) => p.view === v).length;
           return (
@@ -137,7 +122,7 @@ export const DamageInspector: React.FC<DamageInspectorProps> = ({
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap ${
                 activeView === v
                   ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/70 dark:hover:bg-slate-800/60'
               }`}
             >
               <span>{v}</span>
@@ -153,9 +138,9 @@ export const DamageInspector: React.FC<DamageInspectorProps> = ({
 
       {/* 2D Vector Outline Map Container */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
-        <div className="md:col-span-2 relative rounded-xl bg-slate-950 border border-slate-800 p-4 min-h-[320px] flex items-center justify-center overflow-hidden group">
+        <div className="md:col-span-2 relative rounded-xl bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 p-4 min-h-[320px] flex items-center justify-center overflow-hidden group">
           {/* Subtle Grid Background */}
-          <div className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:16px_16px] opacity-40 pointer-events-none" />
+          <div className="absolute inset-0 bg-[radial-gradient(#94a3b8_1px,transparent_1px)] dark:bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:16px_16px] opacity-40 pointer-events-none" />
 
           {/* SVG Outline for selected view */}
           <svg
@@ -249,67 +234,82 @@ export const DamageInspector: React.FC<DamageInspectorProps> = ({
                 {/* Rear Glass */}
                 <path d="M 150 115 Q 250 108 350 115 L 340 155 Q 250 152 160 155 Z" fill="#0284c7" fillOpacity="0.25" stroke="#38bdf8" strokeWidth="1.5" />
                 {/* Taillights */}
-                <polygon points="135,175 175,175 165,195 135,190" fill="#f87171" stroke="#ef4444" strokeWidth="2" />
-                <polygon points="365,175 325,175 335,195 365,190" fill="#f87171" stroke="#ef4444" strokeWidth="2" />
-                {/* Trunk Handle / Line */}
-                <line x1="180" y1="165" x2="320" y2="165" stroke="#38bdf8" strokeWidth="1.5" />
-                {/* License Plate */}
-                <rect x="210" y="195" width="80" height="16" rx="2" fill="#ffffff" stroke="#000000" strokeWidth="1" />
-                <text x="250" y="207" fontSize="9" fontWeight="bold" textAnchor="middle" fill="#000000" stroke="none">12345 | A | 15</text>
+                <polygon points="135,180 175,180 165,200 135,195" fill="#ef4444" stroke="#b91c1c" strokeWidth="2" />
+                <polygon points="365,180 325,180 335,200 365,195" fill="#ef4444" stroke="#b91c1c" strokeWidth="2" />
+                {/* Trunk Plate Area */}
+                <rect x="210" y="185" width="80" height="20" rx="3" fill="#ffffff" stroke="#000000" strokeWidth="1" />
+                <text x="250" y="199" fontSize="9" fontWeight="bold" textAnchor="middle" fill="#000000" stroke="none">12345 | A | 15</text>
               </g>
             )}
 
             {activeView === 'Windshield' && (
               <g stroke="#38bdf8" strokeWidth="2.5" fill="url(#carGrad)" strokeLinejoin="round">
-                {/* Glass Close-Up View */}
-                <rect x="80" y="60" width="340" height="180" rx="16" fill="#0284c7" fillOpacity="0.15" stroke="#38bdf8" strokeWidth="3" />
-                {/* Wiper Blades */}
-                <line x1="140" y1="220" x2="260" y2="120" stroke="#94a3b8" strokeWidth="3" />
-                <line x1="260" y1="220" x2="380" y2="130" stroke="#94a3b8" strokeWidth="3" />
-                {/* Rearview Mirror Anchor */}
-                <polygon points="235,60 265,60 255,85 245,85" fill="#38bdf8" />
+                {/* Glass Close-Up Trapeze */}
+                <path d="M 100 80 L 400 80 L 450 240 L 50 240 Z" fill="#0284c7" fillOpacity="0.3" />
+                <path d="M 250 80 L 250 240" stroke="#38bdf8" strokeDasharray="4 4" strokeWidth="1.5" />
+                <circle cx="250" cy="90" r="10" fill="#1e293b" stroke="#38bdf8" strokeWidth="1.5" />
               </g>
             )}
+
+            {/* Pins on Active View */}
+            {pins
+              .filter((p) => p.view === activeView)
+              .map((p) => {
+                const isSelected = p.id === selectedPinId;
+                return (
+                  <g
+                    key={p.id}
+                    className="cursor-pointer transition-transform hover:scale-125"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedPinId(p.id);
+                    }}
+                  >
+                    {/* Pulsing ring if selected */}
+                    {isSelected && (
+                      <circle
+                        cx={`${p.x}%`}
+                        cy={`${p.y}%`}
+                        r="18"
+                        className="animate-ping fill-rose-500/30"
+                      />
+                    )}
+
+                    {/* Outer Pin Body */}
+                    <circle
+                      cx={`${p.x}%`}
+                      cy={`${p.y}%`}
+                      r={isSelected ? '12' : '10'}
+                      className={`${
+                        isSelected ? 'fill-rose-500 stroke-white' : 'fill-amber-500 stroke-slate-900'
+                      } stroke-2 drop-shadow-md`}
+                    />
+
+                    {/* Pin Center Dot */}
+                    <circle
+                      cx={`${p.x}%`}
+                      cy={`${p.y}%`}
+                      r="4"
+                      fill="#ffffff"
+                    />
+                  </g>
+                );
+              })}
           </svg>
-
-          {/* Damage Pins Overlay on top of SVG */}
-          {currentViewPins.map((pin) => (
-            <button
-              key={pin.id}
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                setSelectedPinId(pin.id);
-              }}
-              style={{ left: `${pin.x}%`, top: `${pin.y}%` }}
-              className={`absolute -translate-x-1/2 -translate-y-1/2 z-20 w-6 h-6 rounded-full flex items-center justify-center text-white text-xs font-bold border-2 border-white shadow-lg transition-transform hover:scale-125 ${getSeverityPinBg(
-                pin.severity
-              )} ${selectedPinId === pin.id ? 'ring-4 ring-cyan-400 scale-125' : ''}`}
-
-            >
-              <AlertTriangle className="w-3.5 h-3.5" />
-            </button>
-          ))}
-
-          {!readOnly && (
-            <div className="absolute bottom-2 left-2 z-10 px-2.5 py-1 rounded-lg bg-slate-900/80 border border-slate-800 text-[11px] text-slate-400 pointer-events-none">
-              Click anywhere on the map to add a damage marker
-            </div>
-          )}
         </div>
 
         {/* Pin Details & Editor Panel */}
-        <div className="rounded-xl bg-slate-900/90 border border-slate-800 p-4 space-y-4">
-          <div className="flex items-center justify-between border-b border-slate-800 pb-2">
-            <h4 className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
-              <Layers className="w-4 h-4 text-emerald-400" />
+        <div className="rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 p-4 space-y-4">
+          <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-2">
+            <h4 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-1.5">
+              <Layers className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
               {selectedPin ? 'Edit Damage Pin' : 'Select or Add Pin'}
             </h4>
             {selectedPin && !readOnly && (
               <button
                 type="button"
                 onClick={() => deletePin(selectedPin.id)}
-                className="p-1 rounded-lg text-rose-400 hover:bg-rose-500/10 transition-colors"
+                className="p-1 rounded-lg text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-500/10 transition-colors"
                 title="Remove Pin"
               >
                 <Trash2 className="w-4 h-4" />
@@ -320,14 +320,14 @@ export const DamageInspector: React.FC<DamageInspectorProps> = ({
           {selectedPin ? (
             <div className="space-y-3">
               <div>
-                <label className="block text-[11px] font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                <label className="block text-[11px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                   Damage Type
                 </label>
                 <select
                   disabled={readOnly}
                   value={selectedPin.type}
                   onChange={(e) => updatePin(selectedPin.id, { type: e.target.value as DamageType })}
-                  className="w-full glass-input rounded-lg px-3 py-2 text-xs bg-slate-900"
+                  className="w-full glass-input rounded-lg px-3 py-2 text-xs bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 border-slate-300 dark:border-slate-700"
                 >
                   <option value="Scratch">Scratch (Rayure)</option>
                   <option value="Dent">Dent (Bosse / Enfoncement)</option>
@@ -337,7 +337,7 @@ export const DamageInspector: React.FC<DamageInspectorProps> = ({
               </div>
 
               <div>
-                <label className="block text-[11px] font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                <label className="block text-[11px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                   Severity Level
                 </label>
                 <div className="grid grid-cols-3 gap-1.5">
@@ -349,8 +349,8 @@ export const DamageInspector: React.FC<DamageInspectorProps> = ({
                       onClick={() => updatePin(selectedPin.id, { severity: sev })}
                       className={`px-2 py-1.5 rounded-lg text-[11px] font-semibold border transition-all ${
                         selectedPin.severity === sev
-                          ? getSeverityBadgeColor(sev) + ' ring-1 ring-white/20'
-                          : 'bg-slate-800 border-slate-700 text-slate-400 hover:text-slate-200'
+                          ? getSeverityBadgeColor(sev) + ' ring-1 ring-emerald-500/40'
+                          : 'bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
                       }`}
                     >
                       {sev}
@@ -360,7 +360,7 @@ export const DamageInspector: React.FC<DamageInspectorProps> = ({
               </div>
 
               <div>
-                <label className="block text-[11px] font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                <label className="block text-[11px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                   Photo URL / Evidence Link
                 </label>
                 <div className="flex items-center gap-1.5">
@@ -370,13 +370,13 @@ export const DamageInspector: React.FC<DamageInspectorProps> = ({
                     placeholder="https://..."
                     value={selectedPin.photoUrl || ''}
                     onChange={(e) => updatePin(selectedPin.id, { photoUrl: e.target.value })}
-                    className="w-full glass-input rounded-lg px-2.5 py-1.5 text-xs"
+                    className="w-full glass-input rounded-lg px-2.5 py-1.5 text-xs bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 border-slate-300 dark:border-slate-700"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-[11px] font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                <label className="block text-[11px] font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                   Agent Inspection Notes
                 </label>
                 <textarea
@@ -385,13 +385,13 @@ export const DamageInspector: React.FC<DamageInspectorProps> = ({
                   placeholder="e.g. 5cm scratch on front bumper right side..."
                   value={selectedPin.notes || ''}
                   onChange={(e) => updatePin(selectedPin.id, { notes: e.target.value })}
-                  className="w-full glass-input rounded-lg p-2 text-xs"
+                  className="w-full glass-input rounded-lg p-2 text-xs bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 border-slate-300 dark:border-slate-700"
                 />
               </div>
             </div>
           ) : (
             <div className="text-center py-8 text-slate-500 text-xs space-y-2">
-              <AlertTriangle className="w-8 h-8 mx-auto stroke-1 text-slate-600" />
+              <AlertTriangle className="w-8 h-8 mx-auto stroke-1 text-slate-400 dark:text-slate-600" />
               <p>Select an existing pin from the map or list, or click on the car map to drop a new damage pin.</p>
             </div>
           )}
@@ -400,8 +400,8 @@ export const DamageInspector: React.FC<DamageInspectorProps> = ({
 
       {/* Pins Summary Table */}
       {pins.length > 0 && (
-        <div className="pt-2 border-t border-slate-800">
-          <div className="text-xs font-semibold text-slate-300 mb-2 uppercase tracking-wider">
+        <div className="pt-2 border-t border-slate-200 dark:border-slate-800">
+          <div className="text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2 uppercase tracking-wider">
             Recorded Damage Log ({pins.length})
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
@@ -414,16 +414,16 @@ export const DamageInspector: React.FC<DamageInspectorProps> = ({
                 }}
                 className={`p-2.5 rounded-xl border text-xs cursor-pointer transition-all flex items-center justify-between ${
                   selectedPinId === p.id
-                    ? 'bg-slate-800 border-cyan-500 shadow-md'
-                    : 'bg-slate-900/60 border-slate-800 hover:border-slate-700'
+                    ? 'bg-slate-100 dark:bg-slate-800 border-cyan-500 shadow-sm'
+                    : 'bg-white dark:bg-slate-900/60 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
                 }`}
               >
                 <div>
-                  <div className="font-semibold text-white flex items-center gap-1.5">
+                  <div className="font-semibold text-slate-900 dark:text-white flex items-center gap-1.5">
                     <span>#{idx + 1} {p.type}</span>
-                    <span className="text-[10px] text-slate-400">({p.view})</span>
+                    <span className="text-[10px] text-slate-500 dark:text-slate-400">({p.view})</span>
                   </div>
-                  <div className="text-[11px] text-slate-400 truncate max-w-[150px]">
+                  <div className="text-[11px] text-slate-500 dark:text-slate-400 truncate max-w-[150px]">
                     {p.notes || 'No description'}
                   </div>
                 </div>
