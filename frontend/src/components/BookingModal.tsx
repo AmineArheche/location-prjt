@@ -184,29 +184,29 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm p-4 overflow-y-auto">
-      <div className="w-full max-w-2xl glass-panel rounded-2xl p-6 border border-slate-700 shadow-2xl my-8 relative">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 dark:bg-black/75 backdrop-blur-sm p-4 overflow-y-auto">
+      <div className="w-full max-w-2xl glass-panel rounded-2xl p-6 border border-slate-200 dark:border-slate-700 shadow-2xl my-8 relative">
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
+        <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4 mb-6">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
+            <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400">
               <Calendar className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-xl font-bold text-white">Create Rental Contract</h2>
-              <p className="text-xs text-slate-400">Dynamic pricing & date-overlap verification</p>
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white">Create Rental Contract</h2>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Dynamic pricing & date-overlap verification</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all"
+            className="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 dark:hover:text-white dark:hover:bg-slate-800 transition-all"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {serverError && (
-          <div className="mb-6 p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 text-sm flex items-center gap-3">
+          <div className="mb-6 p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-500 dark:text-rose-400 text-sm flex items-center gap-3">
             <AlertCircle className="w-5 h-5 flex-shrink-0" />
             <span>{serverError}</span>
           </div>
@@ -214,18 +214,18 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           {/* Section 1: Vehicle & Dates */}
-          <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 space-y-4">
-            <div className="text-xs font-semibold uppercase text-emerald-400 tracking-wider">
+          <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 space-y-4">
+            <div className="text-xs font-semibold uppercase text-emerald-600 dark:text-emerald-400 tracking-wider">
               1. Vehicle & Schedule Selection
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                 Select Vehicle
               </label>
               <select
                 {...register('vehicle_id')}
-                className="w-full glass-input rounded-xl px-4 py-2.5 text-sm bg-slate-900"
+                className="w-full glass-input rounded-xl px-4 py-2.5 text-sm bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 border-slate-300 dark:border-slate-700"
               >
                 <option value="">-- Choose Vehicle --</option>
                 {vehicles.map((v) => (
@@ -241,13 +241,13 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                   Start Date & Time
                 </label>
                 <input
                   type="datetime-local"
                   {...register('start_datetime')}
-                  className="w-full glass-input rounded-xl px-3 py-2 text-sm bg-slate-900"
+                  className="w-full glass-input rounded-xl px-3 py-2 text-sm bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 border-slate-300 dark:border-slate-700"
                 />
                 {errors.start_datetime && (
                   <p className="text-xs text-rose-400 mt-1">{errors.start_datetime.message}</p>
@@ -255,13 +255,13 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                   End Date & Time
                 </label>
                 <input
                   type="datetime-local"
                   {...register('end_datetime')}
-                  className="w-full glass-input rounded-xl px-3 py-2 text-sm bg-slate-900"
+                  className="w-full glass-input rounded-xl px-3 py-2 text-sm bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 border-slate-300 dark:border-slate-700"
                 />
                 {errors.end_datetime && (
                   <p className="text-xs text-rose-400 mt-1">{errors.end_datetime.message}</p>
@@ -271,9 +271,9 @@ export const BookingModal: React.FC<BookingModalProps> = ({
           </div>
 
           {/* Section 2: Customer CIN & Information */}
-          <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 space-y-4">
+          <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 space-y-4">
             <div className="flex items-center justify-between">
-              <div className="text-xs font-semibold uppercase text-emerald-400 tracking-wider flex items-center gap-2">
+              <div className="text-xs font-semibold uppercase text-emerald-600 dark:text-emerald-400 tracking-wider flex items-center gap-2">
                 <UserCheck className="w-4 h-4" />
                 2. Customer Details & CIN Verification
               </div>
@@ -281,7 +281,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                   CIN / Passport Number *
                 </label>
                 <input
@@ -296,7 +296,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                   Customer Full Name *
                 </label>
                 <input
@@ -311,7 +311,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                   Phone Number *
                 </label>
                 <input
@@ -326,7 +326,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                   Driver License Number *
                 </label>
                 <input
@@ -343,15 +343,15 @@ export const BookingModal: React.FC<BookingModalProps> = ({
           </div>
 
           {/* Section 3: Financial & Mileage Calculation */}
-          <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 space-y-4">
-            <div className="text-xs font-semibold uppercase text-emerald-400 tracking-wider flex items-center gap-2">
+          <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 space-y-4">
+            <div className="text-xs font-semibold uppercase text-emerald-600 dark:text-emerald-400 tracking-wider flex items-center gap-2">
               <DollarSign className="w-4 h-4" />
               3. Dynamic Rate & Deposit Calculation
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                   Start Mileage (km)
                 </label>
                 <input
@@ -362,23 +362,23 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                   Deposit Guarantee (MAD)
                 </label>
                 <input
                   type="number"
                   {...register('deposit_amount', { valueAsNumber: true })}
-                  className="w-full glass-input rounded-xl px-3 py-2 text-sm text-teal-300 font-bold"
+                  className="w-full glass-input rounded-xl px-3 py-2 text-sm text-teal-600 dark:text-teal-300 font-bold"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
                   Initial Status
                 </label>
                 <select
                   {...register('status')}
-                  className="w-full glass-input rounded-xl px-3 py-2 text-sm bg-slate-900"
+                  className="w-full glass-input rounded-xl px-3 py-2 text-sm bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 border-slate-300 dark:border-slate-700"
                 >
                   <option value="PENDING">PENDING (RESERVED)</option>
                   <option value="ACTIVE">ACTIVE (RENTED)</option>
@@ -387,14 +387,14 @@ export const BookingModal: React.FC<BookingModalProps> = ({
             </div>
 
             {/* Dynamic Price Display Banner */}
-            <div className="p-4 rounded-xl bg-emerald-950/40 border border-emerald-500/30 flex items-center justify-between">
+            <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-500/30 flex items-center justify-between">
               <div>
-                <div className="text-xs text-emerald-300 font-medium">Calculated Contract Total</div>
-                <div className="text-xs text-slate-400 mt-0.5">
+                <div className="text-xs text-emerald-800 dark:text-emerald-300 font-medium">Calculated Contract Total</div>
+                <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                   {selectedVehicle ? `${selectedVehicle.daily_rate_mad} MAD/day` : 'Select vehicle'}
                 </div>
               </div>
-              <div className="text-2xl font-extrabold text-emerald-400 font-mono">
+              <div className="text-2xl font-extrabold text-emerald-600 dark:text-emerald-400 font-mono">
                 {calculatedTotal.toLocaleString()} MAD
               </div>
             </div>
@@ -408,19 +408,18 @@ export const BookingModal: React.FC<BookingModalProps> = ({
           />
 
           {/* Footer Buttons */}
-
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-800">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-medium transition-all"
+              className="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium border border-slate-200 dark:border-transparent transition-all"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white font-semibold text-sm shadow-lg shadow-emerald-900/30 transition-all disabled:opacity-50"
+              className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white font-semibold text-sm shadow-lg shadow-emerald-900/20 transition-all disabled:opacity-50"
             >
               {isSubmitting ? 'Creating Contract...' : 'Create Contract'}
             </button>
