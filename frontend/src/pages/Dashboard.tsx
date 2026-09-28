@@ -44,13 +44,13 @@ export const Dashboard: React.FC = () => {
   const getVisualStatusBadge = (status: VehicleStatus) => {
     switch (status) {
       case 'AVAILABLE':
-        return 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40 font-bold';
+        return 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border-emerald-300 dark:border-emerald-500/40 font-bold';
       case 'RENTED':
-        return 'bg-rose-500/20 text-rose-300 border-rose-500/40 font-bold';
+        return 'bg-rose-100 dark:bg-rose-500/20 text-rose-700 dark:text-rose-300 border-rose-300 dark:border-rose-500/40 font-bold';
       case 'MAINTENANCE':
-        return 'bg-amber-500/20 text-amber-300 border-amber-500/40 font-bold';
+        return 'bg-amber-100 dark:bg-amber-500/20 text-amber-700 dark:text-amber-300 border-amber-300 dark:border-amber-500/40 font-bold';
       case 'RESERVED':
-        return 'bg-purple-500/20 text-purple-300 border-purple-500/40 font-bold';
+        return 'bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border-purple-300 dark:border-purple-500/40 font-bold';
     }
   };
 
@@ -61,21 +61,21 @@ export const Dashboard: React.FC = () => {
       {/* Header & Quick Action */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-white tracking-tight">Fleet Management Dashboard</h1>
-          <p className="text-sm text-slate-400 mt-1">Real-time data table, 7-day maintenance alerts, and contract generation</p>
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Fleet Management Dashboard</h1>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Real-time data table, 7-day maintenance alerts, and contract generation</p>
         </div>
 
         <div className="flex items-center gap-3">
           <button
             onClick={() => openBookingModalForVehicle()}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white font-semibold text-sm shadow-lg shadow-emerald-900/30 transition-all"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white font-semibold text-sm shadow-lg shadow-emerald-900/20 transition-all"
           >
             <Plus className="w-4 h-4" />
             New Contract
           </button>
           <button
             onClick={fetchAllDashboardData}
-            className="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition-all"
+            className="p-2.5 rounded-xl bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 shadow-sm transition-all"
             title="Refresh Dashboard"
           >
             <RefreshCw className="w-4 h-4" />
@@ -84,7 +84,7 @@ export const Dashboard: React.FC = () => {
       </div>
 
       {errorMessage && (
-        <div className="p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 text-sm flex items-center gap-3">
+        <div className="p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-500 dark:text-rose-400 text-sm flex items-center gap-3">
           <AlertTriangle className="w-5 h-5 flex-shrink-0" />
           <span>{errorMessage}</span>
         </div>
@@ -96,70 +96,70 @@ export const Dashboard: React.FC = () => {
       {/* Status Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
         {/* Total Vehicles */}
-        <div className="glass-panel p-5 rounded-2xl border border-slate-800">
-          <div className="flex items-center justify-between text-slate-400 mb-2">
+        <div className="glass-panel p-5 rounded-2xl border border-slate-200 dark:border-slate-800">
+          <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
             <span className="text-xs font-semibold uppercase tracking-wider">Total Fleet</span>
-            <Car className="w-5 h-5 text-indigo-400" />
+            <Car className="w-5 h-5 text-indigo-500 dark:text-indigo-400" />
           </div>
-          <div className="text-3xl font-extrabold text-white">{summary?.total_vehicles || 0}</div>
-          <div className="text-xs text-slate-400 mt-1">Active Registered Vehicles</div>
+          <div className="text-3xl font-extrabold text-slate-900 dark:text-white">{summary?.total_vehicles || 0}</div>
+          <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">Active Registered Vehicles</div>
         </div>
 
         {/* Available (GREEN) */}
-        <div className="glass-panel p-5 rounded-2xl border border-emerald-500/30 bg-emerald-950/20">
-          <div className="flex items-center justify-between text-emerald-400 mb-2">
+        <div className="glass-panel p-5 rounded-2xl border border-emerald-300/70 dark:border-emerald-500/30 bg-emerald-50/70 dark:bg-emerald-950/20">
+          <div className="flex items-center justify-between text-emerald-600 dark:text-emerald-400 mb-2">
             <span className="text-xs font-semibold uppercase tracking-wider">Available</span>
             <CheckCircle2 className="w-5 h-5" />
           </div>
-          <div className="text-3xl font-extrabold text-emerald-400">{summary?.available_count || 0}</div>
-          <div className="text-xs text-emerald-300/80 mt-1">Green Status</div>
+          <div className="text-3xl font-extrabold text-emerald-600 dark:text-emerald-400">{summary?.available_count || 0}</div>
+          <div className="text-xs text-emerald-600/80 dark:text-emerald-300/80 mt-1">Green Status</div>
         </div>
 
         {/* Rented (RED) */}
-        <div className="glass-panel p-5 rounded-2xl border border-rose-500/30 bg-rose-950/20">
-          <div className="flex items-center justify-between text-rose-400 mb-2">
+        <div className="glass-panel p-5 rounded-2xl border border-rose-300/70 dark:border-rose-500/30 bg-rose-50/70 dark:bg-rose-950/20">
+          <div className="flex items-center justify-between text-rose-600 dark:text-rose-400 mb-2">
             <span className="text-xs font-semibold uppercase tracking-wider">Rented</span>
             <Key className="w-5 h-5" />
           </div>
-          <div className="text-3xl font-extrabold text-rose-400">{summary?.rented_count || 0}</div>
-          <div className="text-xs text-rose-300/80 mt-1">Red Status</div>
+          <div className="text-3xl font-extrabold text-rose-600 dark:text-rose-400">{summary?.rented_count || 0}</div>
+          <div className="text-xs text-rose-600/80 dark:text-rose-300/80 mt-1">Red Status</div>
         </div>
 
         {/* Maintenance (AMBER) */}
-        <div className="glass-panel p-5 rounded-2xl border border-amber-500/30 bg-amber-950/20">
-          <div className="flex items-center justify-between text-amber-400 mb-2">
+        <div className="glass-panel p-5 rounded-2xl border border-amber-300/70 dark:border-amber-500/30 bg-amber-50/70 dark:bg-amber-950/20">
+          <div className="flex items-center justify-between text-amber-600 dark:text-amber-400 mb-2">
             <span className="text-xs font-semibold uppercase tracking-wider">Maintenance</span>
             <Wrench className="w-5 h-5" />
           </div>
-          <div className="text-3xl font-extrabold text-amber-400">{summary?.maintenance_count || 0}</div>
-          <div className="text-xs text-amber-300/80 mt-1">Amber Status</div>
+          <div className="text-3xl font-extrabold text-amber-600 dark:text-amber-400">{summary?.maintenance_count || 0}</div>
+          <div className="text-xs text-amber-600/80 dark:text-amber-300/80 mt-1">Amber Status</div>
         </div>
 
         {/* Reserved (PURPLE) */}
-        <div className="glass-panel p-5 rounded-2xl border border-purple-500/30 bg-purple-950/20">
-          <div className="flex items-center justify-between text-purple-400 mb-2">
+        <div className="glass-panel p-5 rounded-2xl border border-purple-300/70 dark:border-purple-500/30 bg-purple-50/70 dark:bg-purple-950/20">
+          <div className="flex items-center justify-between text-purple-600 dark:text-purple-400 mb-2">
             <span className="text-xs font-semibold uppercase tracking-wider">Reserved</span>
             <Clock className="w-5 h-5" />
           </div>
-          <div className="text-3xl font-extrabold text-purple-400">{summary?.reserved_count || 0}</div>
-          <div className="text-xs text-purple-300/80 mt-1">Purple Status</div>
+          <div className="text-3xl font-extrabold text-purple-600 dark:text-purple-400">{summary?.reserved_count || 0}</div>
+          <div className="text-xs text-purple-600/80 dark:text-purple-300/80 mt-1">Purple Status</div>
         </div>
       </div>
 
       {/* Real-time Data Table of Vehicles */}
-      <div className="glass-panel rounded-2xl border border-slate-800 p-6 space-y-4">
+      <div className="glass-panel rounded-2xl border border-slate-200 dark:border-slate-800 p-6 space-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-lg font-bold text-white">Real-Time Vehicle Inventory Table</h2>
-            <p className="text-xs text-slate-400">Live endpoint sync: `/vehicles/dashboard` & `/vehicles/`</p>
+            <h2 className="text-lg font-bold text-slate-900 dark:text-white">Real-Time Vehicle Inventory Table</h2>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Live endpoint sync: `/vehicles/dashboard` & `/vehicles/`</p>
           </div>
-          <span className="text-xs font-medium px-3 py-1 rounded-full bg-slate-800 text-slate-300 border border-slate-700">
+          <span className="text-xs font-medium px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
             {vehicles.length} Total Vehicles
           </span>
         </div>
 
         {loading ? (
-          <div className="p-12 text-center text-emerald-400 flex items-center justify-center gap-3">
+          <div className="p-12 text-center text-emerald-600 dark:text-emerald-400 flex items-center justify-center gap-3">
             <RefreshCw className="w-5 h-5 animate-spin" />
             <span>Syncing Real-Time Vehicle Table...</span>
           </div>
@@ -169,8 +169,8 @@ export const Dashboard: React.FC = () => {
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm text-slate-300">
-              <thead className="bg-slate-900/90 text-xs font-semibold uppercase text-slate-400 border-b border-slate-800">
+            <table className="w-full text-left text-sm text-slate-600 dark:text-slate-300">
+              <thead className="bg-slate-100/90 dark:bg-slate-900/90 text-xs font-semibold uppercase text-slate-600 dark:text-slate-400 border-b border-slate-200 dark:border-slate-800">
                 <tr>
                   <th className="px-6 py-4">Matriculation</th>
                   <th className="px-6 py-4">Make & Model</th>
@@ -181,14 +181,14 @@ export const Dashboard: React.FC = () => {
                   <th className="px-6 py-4 text-right">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/60">
+              <tbody className="divide-y divide-slate-200 dark:divide-slate-800/60">
                 {vehicles.map((v) => (
-                  <tr key={v.id} className="hover:bg-slate-800/40 transition-colors">
-                    <td className="px-6 py-4 font-mono font-extrabold text-emerald-400">{v.matriculation}</td>
-                    <td className="px-6 py-4 font-medium text-white">{v.make_model}</td>
-                    <td className="px-6 py-4 text-slate-300">{v.year}</td>
-                    <td className="px-6 py-4 text-slate-300">{v.current_mileage.toLocaleString()} km</td>
-                    <td className="px-6 py-4 font-bold text-teal-300">{v.daily_rate_mad} MAD/day</td>
+                  <tr key={v.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
+                    <td className="px-6 py-4 font-mono font-extrabold text-emerald-600 dark:text-emerald-400">{v.matriculation}</td>
+                    <td className="px-6 py-4 font-medium text-slate-900 dark:text-white">{v.make_model}</td>
+                    <td className="px-6 py-4 text-slate-600 dark:text-slate-300">{v.year}</td>
+                    <td className="px-6 py-4 text-slate-600 dark:text-slate-300">{v.current_mileage.toLocaleString()} km</td>
+                    <td className="px-6 py-4 font-bold text-teal-600 dark:text-teal-300">{v.daily_rate_mad} MAD/day</td>
                     <td className="px-6 py-4">
                       <span className={`px-3 py-1 rounded-full text-xs border ${getVisualStatusBadge(v.status)}`}>
                         {v.status}
@@ -198,12 +198,12 @@ export const Dashboard: React.FC = () => {
                       {v.status === 'AVAILABLE' ? (
                         <button
                           onClick={() => openBookingModalForVehicle(v.id)}
-                          className="px-3 py-1.5 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 text-xs font-semibold transition-all"
+                          className="px-3 py-1.5 rounded-lg bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 text-xs font-semibold transition-all"
                         >
                           Book Now
                         </button>
                       ) : (
-                        <span className="text-xs text-slate-500 italic">Unavailable</span>
+                        <span className="text-xs text-slate-400 dark:text-slate-500 italic">Unavailable</span>
                       )}
                     </td>
                   </tr>
