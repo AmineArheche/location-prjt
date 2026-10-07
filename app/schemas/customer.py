@@ -1,7 +1,8 @@
+import re
 from uuid import UUID
 from datetime import datetime
 from typing import Optional, Dict, Any
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import field_validator, BaseModel, ConfigDict, Field
 
 
 class CustomerBase(BaseModel):
@@ -35,3 +36,12 @@ class CustomerResponse(CustomerBase):
     deleted_at: Optional[datetime] = None
 
     model_config = ConfigDict(from_attributes=True)
+
+    # Code Review: Validation stricte du téléphone marocain
+    @field_validator('phone_number')
+    @classmethod
+    def validate_phone(cls, v: str) -> str:
+        clean = re.sub(r'[\s\.\-\(\)]', '', v)
+        if not re.match(r'^(?:\+212|0)[5-7][0-9]{8}$', clean):
+            raise ValueError('Numéro de téléphone marocain invalide')
+        return clean
