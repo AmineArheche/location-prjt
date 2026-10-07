@@ -75,3 +75,11 @@ class Booking(Base):
     customer: Mapped["Customer"] = relationship("Customer", lazy="selectin")
     agent: Mapped["User"] = relationship("User", lazy="selectin")
 
+
+    @property
+    def duration_days(self) -> int:
+        """Calcule le nombre de jours de location facturables."""
+        if self.start_datetime and self.end_datetime:
+            delta = self.end_datetime - self.start_datetime
+            return max(1, (delta.total_seconds() + 86399) // 86400)
+        return 1
