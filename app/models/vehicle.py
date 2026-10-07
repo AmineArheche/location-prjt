@@ -48,3 +48,7 @@ class Vehicle(Base):
     # Relationships
     agency: Mapped[Optional["Agency"]] = relationship("Agency", lazy="selectin")
 
+
+    def is_available_for_rental(self) -> bool:
+        """Vérifie si le véhicule est immédiatement disponible pour location."""
+        return self.status == 'AVAILABLE' and not self.is_deleted
