@@ -2,7 +2,12 @@ from typing import Optional
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
-class Settings(BaseSettings):
+class Settings
+    # Code Review: Métadonnées de l'application
+    APP_NAME_DISPLAY: str = 'Morocco FleetManager Pro'
+    CURRENCY_CODE: str = 'MAD'
+    DEFAULT_TIMEZONE: str = 'Africa/Casablanca'
+(BaseSettings):
     PROJECT_NAME: str = "Scalable FastAPI REST API"
     VERSION: str = "0.1.0"
     API_V1_STR: str = "/api/v1"
