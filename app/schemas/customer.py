@@ -35,3 +35,9 @@ class CustomerResponse(CustomerBase):
     deleted_at: Optional[datetime] = None
 
     model_config = ConfigDict(from_attributes=True)
+
+    # Code Review: Normalisation de la CIN en majuscules
+    @field_validator('cin_or_passport')
+    @classmethod
+    def normalize_cin(cls, v: str) -> str:
+        return v.strip().upper()
